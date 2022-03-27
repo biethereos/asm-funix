@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import './App.css';
 import StaffList from './components/StaffListComponent';
-import { STAFFS } from './shared/staffs';
+import { STAFFS } from './shared/staffs'
 
-class App extends Component() {
+class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
