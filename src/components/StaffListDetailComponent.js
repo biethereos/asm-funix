@@ -23,11 +23,13 @@ function RenderStaff({ staff }) {
 }
 
 const StaffListDetail = (props) => {
-	if (props.dish != null) {
+	if (props.staff != null) {
 		return (
 			<div className="container">
 				<div className="row">
-					<RenderStaff staff={props.staff} />
+					<div className="col-md-4 mt-3">
+						<RenderStaff staff={props.staff} />
+					</div>
 				</div>
 			</div>
 		);

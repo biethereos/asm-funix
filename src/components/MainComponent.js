@@ -1,32 +1,36 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import Header from './HeaderComponent';
 import StaffList from './StaffListComponent';
-import { STAFFS } from '../shared/staffs';
 import StaffListDetail from './StaffListDetailComponent';
+import { STAFFS } from '../shared/staffs';
+import Footer from './FooterComponent';
+import Home from './HomeComponent';
+import { Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 export class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			staffs: STAFFS,
-			selectEmployee: null
+			staffs: STAFFS
 		};
 	}
 
-	onSelectedEmployee(staffId) {
-		this.setState({ selectEmployee: staffId });
-	}
-
 	render() {
+		const HomePage = () => {
+			return <Home />;
+		};
+
 		return (
 			<div>
-				<Navbar dark color="primary">
-					<div className="container">
-						<NavbarBrand href="/">Ứng Dụng Quản Lý Nhân Sự v1.0</NavbarBrand>
-					</div>
-				</Navbar>
-				<StaffList staffs={this.state.staffs} onClick={(staffId) => this.onSelectedEmployee(staffId)} />
-                <StaffListDetail staff={this.state.staffs.filter((staff) => staff.id === this.state.selectEmployee)[0]} />
+				<Header />
+				<Switch>
+					<Route path="/home" component={HomePage} />
+					<Route exact path="/staff" component={() => <StaffList staffs={this.state.staffs} />} />
+					<Redirect to='/home' />
+				</Switch>
+				<Footer />
 			</div>
 		);
 	}

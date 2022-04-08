@@ -15,7 +15,7 @@ function RenderStaffList({ staff, onClick }) {
 const StaffList = (props) => {
 	const employeeList = props.staffs.map((staff) => {
 		return (
-			<div key={staff.id} className="col-md-3 mt-1">
+			<div key={staff.id} className="col-sm-6 col-md-4 col-lg-2 mt-3">
 				<RenderStaffList staff={staff} onClick={props.onClick} />
 			</div>
 		);
