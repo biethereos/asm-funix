@@ -3,7 +3,7 @@ import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
 
 function RenderStaffList({ staff, onClick }) {
 	return (
-		<Card onClick={() => onClick(staff.id)}>
+		<Card>
 			<CardImg width="100%" src={staff.image} alt={staff.name} />
 			<CardBody>
 				<CardTitle> {staff.name}</CardTitle>

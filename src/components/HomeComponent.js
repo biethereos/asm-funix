@@ -1,11 +1,14 @@
 import React from 'react';
+import StaffList from './StaffListComponent';
 
 const Home = (props) => {
-    return (
-        <div>
-            <h4>Home</h4>
-        </div>
-    );
-}
+	return (
+		<div className="container">
+			<div className="row align-items-start">
+				<StaffList staffs={props.staffs} />
+			</div>
+		</div>
+	);
+};
 
 export default Home;
