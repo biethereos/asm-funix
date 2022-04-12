@@ -31,7 +31,7 @@ const StaffListDetail = (props) => {
 				<div className='row'>
 					<Breadcrumb>
 						<BreadcrumbItem>
-							<Link to="/menu">Staff</Link>
+							<Link to="/staff">Staff</Link>
 						</BreadcrumbItem>
 						<BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
 					</Breadcrumb>

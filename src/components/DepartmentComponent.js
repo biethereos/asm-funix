@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
 
-const RenderDepartments = ({ department, onClick }) => {
+const RenderDepartments = ({ department }) => {
 	return (
 		<Card>
 			<CardBody>
@@ -13,11 +13,10 @@ const RenderDepartments = ({ department, onClick }) => {
 };
 
 const Department = (props) => {
-	console.log(props.departments);
 	const deparmentList = props.departments.map((department) => {
 		return (
-			<div key={department.id} className="col-sm-6 col-md-4 col-lg-2 mt-3">
-				<RenderDepartments department={department} onClick={props.onClick} />
+			<div key={department.id} className="col-sm-12 col-md-6 col-lg-4 my-2">
+				<RenderDepartments department={department} />
 			</div>
 		);
 	});

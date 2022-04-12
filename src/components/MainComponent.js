@@ -5,11 +5,11 @@ import StaffListDetail from './StaffListDetailComponent';
 import { STAFFS } from '../shared/staffs';
 import { DEPARTMENTS } from '../shared/staffs';
 import Footer from './FooterComponent';
-import Home from './HomeComponent';
 import { Switch } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import Department from './DepartmentComponent';
+import Salary from './SalaryComponent';
 
 export class Main extends Component {
 	constructor(props) {
@@ -21,27 +21,22 @@ export class Main extends Component {
 	}
 
 	render() {
-		const HomePage = () => {
+		const StaffWithId = ({ match }) => {
 			return (
-				<Home
-					staffs={this.state.staffs}
-					// department={this.state.departments.filter((department) => department.id)[0]}
+				<StaffListDetail
+					staff={this.state.staffs.filter((staff) => staff.id === parseInt(match.params.staffId, 10))[0]}
 				/>
 			);
 		};
-
 		return (
 			<div>
 				<Header />
 				<Switch>
-					<Route path="/home" component={HomePage} />
 					<Route exact path="/staff" component={() => <StaffList staffs={this.state.staffs} />} />
-					<Route
-						exact
-						path="/department"
-						component={() => <Department departments={this.state.departments} />}
-					/>
-					<Redirect to="/home" />
+					<Route path="/staff/:staffId" component={StaffWithId} />
+					<Route path="/department" component={() => <Department departments={this.state.departments} />} />
+					<Route path="/salary" component={() => <Salary staffs={this.state.staffs} />} />
+					<Redirect to="/staff" />
 				</Switch>
 				<Footer />
 			</div>
