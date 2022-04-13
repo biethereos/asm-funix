@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
+import Search from './SearchComponent';
 
 function RenderStaffList({ staff, onClick }) {
 	return (
@@ -26,6 +27,9 @@ const StaffList = (props) => {
 
 	return (
 		<div className="container">
+			<div className="row">
+				<Search />
+			</div>
 			<div className="row">{employeeList}</div>
 		</div>
 	);

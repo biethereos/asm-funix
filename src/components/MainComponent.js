@@ -16,7 +16,8 @@ export class Main extends Component {
 		super(props);
 		this.state = {
 			staffs: STAFFS,
-			departments: DEPARTMENTS
+			departments: DEPARTMENTS,
+			stringSearch: ''
 		};
 	}
 
