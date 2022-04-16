@@ -17,9 +17,15 @@ export class Main extends Component {
 		this.state = {
 			staffs: STAFFS,
 			departments: DEPARTMENTS,
-			stringSearch: ''
+			inputText: ''
 		};
+		this.inputHandler = this.inputHandler.bind(this);
 	}
+
+	inputHandler = (e) => {
+		const updateText = e.target.value.toLowerCase();
+		this.setState({ inputText: updateText });
+	};
 
 	render() {
 		const StaffWithId = ({ match }) => {
@@ -33,7 +39,11 @@ export class Main extends Component {
 			<div>
 				<Header />
 				<Switch>
-					<Route exact path="/staff" component={() => <StaffList staffs={this.state.staffs} />} />
+					<Route
+						exact
+						path="/staff"
+						component={() => <StaffList staffs={this.state.staffs} input={this.state.inputText} />}
+					/>
 					<Route path="/staff/:staffId" component={StaffWithId} />
 					<Route path="/department" component={() => <Department departments={this.state.departments} />} />
 					<Route path="/salary" component={() => <Salary staffs={this.state.staffs} />} />

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
-import Search from './SearchComponent';
 
-function RenderStaffList({ staff, onClick }) {
+function RenderStaffList({ staff }) {
 	return (
 		<Link to={`staff/${staff.id}`}>
 			<Card>
@@ -17,20 +16,36 @@ function RenderStaffList({ staff, onClick }) {
 }
 
 const StaffList = (props) => {
-	const employeeList = props.staffs.map((staff) => {
-		return (
-			<div key={staff.id} className="col-sm-6 col-md-4 col-lg-2 mt-3">
-				<RenderStaffList staff={staff} onClick={props.onClick} />
-			</div>
-		);
-	});
-
+	console.log(props.input);
+	const EmployeeList = props.staffs
+		.filter((el) => {
+			if (props.input === '') {
+				return el;
+			} else {
+				return el.text.toLowerCase().include(props.input);
+			}
+		})
+		.map((el) => {
+			return (
+				<div key={el.id} className="col-sm-6 col-md-4 col-lg-2 mt-3">
+					<RenderStaffList staff={el} />
+				</div>
+			);
+		});
 	return (
 		<div className="container">
 			<div className="row">
-				<Search />
+				<div className="col-3 mt-3">
+					<input
+						type="text"
+						className="form-control"
+						defaultValue={props.input}
+						onChange={props.inputHandler}
+						placeholder="Tìm kiếm nhân viên ..."
+					/>
+				</div>
 			</div>
-			<div className="row">{employeeList}</div>
+			<div className="row">{EmployeeList}</div>
 		</div>
 	);
 };
