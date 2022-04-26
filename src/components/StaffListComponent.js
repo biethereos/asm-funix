@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
 
@@ -16,22 +16,27 @@ function RenderStaffList({ staff }) {
 }
 
 const StaffList = (props) => {
-	console.log(props.input);
-	const EmployeeList = props.staffs
-		.filter((el) => {
-			if (props.input === '') {
-				return el;
-			} else {
-				return el.text.toLowerCase().include(props.input);
-			}
+	const [ inputText, setInputText ] = useState('');
+	const [ sortBy, setSortBy ] = useState(false);
+
+	let inputHandler = (e) => {
+		//convert input text to lower case
+		var lowerCase = e.target.value.toLowerCase();
+		setInputText(lowerCase);
+	};
+
+	const filteredData = props.staffs
+		.filter((item) => {
+			return item.name.toLowerCase().includes(inputText.toLowerCase());
 		})
-		.map((el) => {
-			return (
-				<div key={el.id} className="col-sm-6 col-md-4 col-lg-2 mt-3">
-					<RenderStaffList staff={el} />
-				</div>
-			);
-		});
+		.sort((a, b) => (sortBy ? a.id - b.id : b.id - a.id));
+	const employeeList = filteredData.map((staff) => {
+		return (
+			<div key={staff.id} className="col-sm-6 col-md-4 col-lg-2 mt-3">
+				<RenderStaffList staff={staff} />
+			</div>
+		);
+	});
 	return (
 		<div className="container">
 			<div className="row">
@@ -39,13 +44,18 @@ const StaffList = (props) => {
 					<input
 						type="text"
 						className="form-control"
-						defaultValue={props.input}
-						onChange={props.inputHandler}
+						value={inputText}
+						onChange={inputHandler}
 						placeholder="Tìm kiếm nhân viên ..."
 					/>
 				</div>
+				<div className="col-3 mt-3">
+					<button className="btn btn-success" onClick={() => setSortBy(!sortBy)}>
+						Sắp xếp MNV
+					</button>
+				</div>
 			</div>
-			<div className="row">{EmployeeList}</div>
+			<div className="row">{employeeList}</div>
 		</div>
 	);
 };

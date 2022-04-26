@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
 
 const base = 3000000;
-const hourOfOvertime = 200000;
+const hourOfOvertime = 200000 / 8;
 function RenderSalary({ salary }) {
 	return (
 		<Card>
@@ -20,15 +20,21 @@ function RenderSalary({ salary }) {
 }
 
 const Salary = (props) => {
-	const salaryList = props.staffs.map((staff) => {
-		return (
-			<div key={staff.id} className="col-sm-12 col-md-6 col-lg-4 my-2">
-				<RenderSalary salary={staff} />
-			</div>
-		);
-	});
+	let [ sortBySalary, setSortBySalary ] = useState(false);
+	const salaryList = props.staffs
+		.sort((a, b) => (sortBySalary ? a.salaryScale - b.salaryScale : b.salaryScale - a.salaryScale))
+		.map((staff) => {
+			return (
+				<div key={staff.id} className="col-sm-12 col-md-6 col-lg-4 my-2">
+					<RenderSalary salary={staff} />
+				</div>
+			);
+		});
 	return (
 		<div className="container">
+			<button className="btn btn-primary" onClick={() => setSortBySalary(!sortBySalary)}>
+				Sắp xếp theo lương
+			</button>
 			<div className="row">{salaryList}</div>
 		</div>
 	);
