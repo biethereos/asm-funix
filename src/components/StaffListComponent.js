@@ -40,7 +40,7 @@ const StaffList = (props) => {
 	return (
 		<div className="container">
 			<div className="row">
-				<div className="col-3 mt-3">
+				<div className="col-xs-12 col-md-3 col-lg-6 mt-3">
 					<input
 						type="text"
 						className="form-control"
@@ -49,8 +49,8 @@ const StaffList = (props) => {
 						placeholder="Tìm kiếm nhân viên ..."
 					/>
 				</div>
-				<div className="col-3 mt-3">
-					<button className="btn btn-success" onClick={() => setSortBy(!sortBy)}>
+				<div className="col-xs-12 col-md-9 col-lg-6 mt-3">
+					<button className="btn btn-primary" onClick={() => setSortBy(!sortBy)}>
 						Sắp xếp MNV
 					</button>
 				</div>

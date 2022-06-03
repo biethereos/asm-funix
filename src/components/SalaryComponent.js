@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardText, CardTitle } from 'reactstrap';
 
 const base = 3000000;
-const hourOfOvertime = 200000 / 8;
+const hourOfOvertime = 200000;
 function RenderSalary({ salary }) {
 	return (
 		<Card>
@@ -22,7 +23,7 @@ function RenderSalary({ salary }) {
 const Salary = (props) => {
 	let [ sortBySalary, setSortBySalary ] = useState(false);
 	const salaryList = props.staffs
-		.sort((a, b) => (sortBySalary ? a.salaryScale - b.salaryScale : b.salaryScale - a.salaryScale))
+		.sort((a, b) => (sortBySalary ? a.id - b.id : b.id - a.id))
 		.map((staff) => {
 			return (
 				<div key={staff.id} className="col-sm-12 col-md-6 col-lg-4 my-2">
@@ -32,9 +33,19 @@ const Salary = (props) => {
 		});
 	return (
 		<div className="container">
-			<button className="btn btn-primary" onClick={() => setSortBySalary(!sortBySalary)}>
-				Sắp xếp theo lương
-			</button>
+			<div className='row'>
+				<Breadcrumb>
+						<BreadcrumbItem>
+							<Link to="/staff">Nhân Viên</Link>
+						</BreadcrumbItem>
+						<BreadcrumbItem active>{props.staff}Bảng lương</BreadcrumbItem>
+				</Breadcrumb>
+			</div>
+			<div className="row justify-content-end mx-2">
+				<button className="btn btn-primary btn-sm" onClick={() => setSortBySalary(!sortBySalary)}>
+					Sắp xếp theo id
+				</button>
+			</div>
 			<div className="row">{salaryList}</div>
 		</div>
 	);

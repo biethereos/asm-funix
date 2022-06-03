@@ -9,7 +9,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Department from './DepartmentComponent';
 import Salary from './SalaryComponent';
 
-export class Main extends Component {
+class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

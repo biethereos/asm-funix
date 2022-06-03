@@ -5,7 +5,7 @@ const Footer = (props) => {
 		<div className="footer">
 			<div className="container">
 				<div className="row justify-content-center">
-					<div className="col-7 col-sm-5">
+					<div className="col-sm-12 col-md-5 col-lg-5">
 						<h5>Our Address</h5>
 						<address>
 							121, Clear Water Bay Road<br />
@@ -17,7 +17,7 @@ const Footer = (props) => {
 							<a href="mailto:confusion@food.net">confusion@food.net</a>
 						</address>
 					</div>
-					<div className="col-12 col-sm-4 align-self-center">
+					<div className="col-sm-12 col-md-4 col-lg-4 align-self-center">
 						<div className="text-center">
 							<a className="btn btn-social-icon btn-google" href="http://google.com/+">
 								<i className="fa fa-google-plus" />
