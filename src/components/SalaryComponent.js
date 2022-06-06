@@ -38,7 +38,7 @@ const Salary = (props) => {
 						<BreadcrumbItem>
 							<Link to="/staff">Nhân Viên</Link>
 						</BreadcrumbItem>
-						<BreadcrumbItem active>{props.staff}Bảng lương</BreadcrumbItem>
+						<BreadcrumbItem active>Bảng lương</BreadcrumbItem>
 				</Breadcrumb>
 			</div>
 			<div className="row justify-content-end mx-2">
