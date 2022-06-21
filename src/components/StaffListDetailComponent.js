@@ -10,9 +10,8 @@ function RenderStaff({ staff }) {
 			<div className="row">
 				<div className="col-xs-12 col-md-3 col-lg-4">
 					<Card>
-						<CardImg width="100%" src={staff.image} alt={staff.name} />	
+						<CardImg width="100%" src={staff.image} alt={staff.name} />
 					</Card>
-					{/* <img src={staff.image} alt={staff.name} width="100%" /> */}
 				</div>
 				<div className="col-xs-12 col-md-9 col-lg-8">
 					<Card>

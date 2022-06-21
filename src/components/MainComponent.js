@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Header from './HeaderComponent';
 import StaffList from './StaffListComponent';
 import StaffListDetail from './StaffListDetailComponent';
-import { STAFFS } from '../shared/staffs';
-import { DEPARTMENTS } from '../shared/staffs';
 import Footer from './FooterComponent';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Department from './DepartmentComponent';
 import Salary from './SalaryComponent';
+import { DEPARTMENTS, STAFFS } from '../shared/staffs';
+
 
 class Main extends Component {
 	constructor(props) {
@@ -20,13 +20,15 @@ class Main extends Component {
 	}
 
 	addStaff = (staff) => {
-		const id = Math.floor(Math.random() * 10000 + 1);
-		const newStaff = {id, ...staff};
+		const id = parseInt(this.state.staffs.length, 10);
+		const newStaff = { id, ...staff };
 		this.setState({
-			staffs: [...this.state.staffs, newStaff]
+			staffs: [ ...this.state.staffs, newStaff ]
 		});
+		console.log(newStaff)
+		console.log(this.state.staffs);
+
 	}
-	
 
 	render() {
 		const StaffWithId = ({ match }) => {
@@ -40,7 +42,11 @@ class Main extends Component {
 			<div>
 				<Header />
 				<Switch>
-					<Route exact path="/staff" component={() => (<StaffList addNewStaff={this.addStaff} staffs={this.state.staffs} />)} />
+					<Route
+						exact
+						path="/staff"
+						component={() => (<StaffList addNewStaff={this.addStaff} staffs={this.state.staffs} />)}
+					/>
 					<Route path="/staff/:staffId" component={StaffWithId} />
 					<Route path="/department" component={() => <Department departments={this.state.departments} />} />
 					<Route path="/salary" component={() => <Salary staffs={this.state.staffs} />} />
