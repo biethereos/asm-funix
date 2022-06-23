@@ -20,13 +20,24 @@ class Main extends Component {
 	}
 
 	addStaff = (staff) => {
-		const id = Math.floor(Math.random() * 10000 + 1);
-		const newStaff = {id, ...staff};
+		const id = parseInt(this.state.staffs.length, 10);
+		const newStaff = { id, ...staff };
+		const department = this.state.departments.find((x) => x.name === newStaff.department);
+		newStaff.department = department;
+		const data = [ ...this.state.staffs, newStaff ];
+		//lưu localStorage
+		localStorage.setItem('staffs', JSON.stringify(data));
 		this.setState({
-			staffs: [...this.state.staffs, newStaff]
+			staffs: data
 		});
+	};
+
+	componentDidMount() {
+		let data = JSON.parse(localStorage.getItem('staffs'))
+		this.setState({
+			staffs: data
+		})
 	}
-	
 
 	render() {
 		const StaffWithId = ({ match }) => {
@@ -40,7 +51,11 @@ class Main extends Component {
 			<div>
 				<Header />
 				<Switch>
-					<Route exact path="/staff" component={() => (<StaffList addNewStaff={this.addStaff} staffs={this.state.staffs} />)} />
+					<Route
+						exact
+						path="/staff"
+						component={() => <StaffList addNewStaff={this.addStaff} staffs={this.state.staffs} />}
+					/>
 					<Route path="/staff/:staffId" component={StaffWithId} />
 					<Route path="/department" component={() => <Department departments={this.state.departments} />} />
 					<Route path="/salary" component={() => <Salary staffs={this.state.staffs} />} />

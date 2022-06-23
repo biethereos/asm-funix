@@ -38,7 +38,7 @@ class StaffList extends Component {
 			doB: '',
 			salaryScale: 1,
 			startDate: '',
-			department: '',
+			department: 'Sale',
 			annualLeave: 0,
 			overTime: 0,
 			salary: 3000,
@@ -119,8 +119,8 @@ class StaffList extends Component {
 			overTime: ''
 		};
 
-		if (this.state.touched.name && name.length < 2) {
-			errors.name = 'Yêu cầu nhiều hơn 2 ký tự';
+		if (this.state.touched.name && name.length < 3) {
+			errors.name = 'Yêu cầu nhiều hơn 3 ký tự';
 		} else if (this.state.touched.name && name.length > 30) {
 			errors.name = 'Yêu cầu ít hơn 30 ký tự';
 		}
@@ -162,7 +162,6 @@ class StaffList extends Component {
 			this.state.annualLeave,
 			this.state.overTime
 		);
-
 		const filteredData = this.props.staffs.filter((item) => {
 			return item.name.toLowerCase().includes(this.state.input.toLowerCase());
 		});
