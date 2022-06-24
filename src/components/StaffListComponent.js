@@ -77,9 +77,9 @@ class StaffList extends Component {
 	// 	this.setState({ [name]: value });
 	// }
 
-	handleBlur = (field) => (event) => {
-		this.setState({ touched: { ...this.state.touched, [field]: true } });
-	};
+	// handleBlur = (field) => (event) => {
+	// 	this.setState({ touched: { ...this.state.touched, [field]: true } });
+	// };
 
 	toggleModal = () => {
 		this.setState({ isOpenModal: !this.state.isOpenModal });
