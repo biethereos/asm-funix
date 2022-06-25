@@ -5,6 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function RenderStaff({ staff }) {
+	console.log(staff)
 	if (staff != null) {
 		return (
 			<div className="row">
