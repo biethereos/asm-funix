@@ -13,7 +13,9 @@ const RenderDepartments = ({ department }) => {
 };
 
 const Department = (props) => {
-	const deparmentList = props.departments.map((department) => {
+	const departments = props.departments.staffs.map(item => item.department).filter((item, pos, self) => self.indexOf(item) === pos);
+	console.log(departments);
+	const deparmentList = departments.map((department) => {
 		return (
 			<div key={department.id} className="col-xs-12 col-md-6 col-lg-4 my-2">
 				<RenderDepartments department={department} />
