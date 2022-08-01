@@ -11,8 +11,6 @@ import { Loading } from "./LoadingComponent";
 import { Link } from "react-router-dom";
 
 function RenderStaffDept({ staff, department }) {
-  console.log(staff);
-  console.log(department);
   return (
     <Link to={`/staff/${staff.id}`}>
       <Card>

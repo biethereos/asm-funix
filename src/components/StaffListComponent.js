@@ -108,7 +108,7 @@ class StaffList extends Component {
     staff.departmentId = department.id;
     department.numberOfStaff++;
     staff.image = image;
-    this.props.addStaff(staff);
+    this.props.postStaff(staff);
   };
 
   // validate(name, doB, salaryScale, startDate, department, annualLeave, overTime) {

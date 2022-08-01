@@ -8,10 +8,10 @@ import Department from "./DepartmentComponent";
 import Salary from "./SalaryComponent";
 import { connect } from "react-redux";
 import {
-  addStaff,
   fetchDepartments,
   fetchStaffs,
   fetchStaffsSalary,
+  postStaff,
 } from "../redux/ActionCreators";
 import DepartmentDetail from "./DepartmentDetailComponent";
 
@@ -24,7 +24,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addStaff: (staff) => dispatch(addStaff(staff)),
+  postStaff: (staff) => dispatch(postStaff(staff)),
   fetchStaffs: () => {
     dispatch(fetchStaffs());
   },
@@ -115,7 +115,7 @@ class Main extends Component {
             path="/staff"
             component={() => (
               <StaffList
-                addStaff={this.props.addStaff}
+                postStaff={this.props.postStaff}
                 staffs={this.props.staffs.staffs}
                 departments={this.props.departments.departments}
                 staffsLoading={this.props.staffs.isLoading}

@@ -29,7 +29,7 @@ export const Staffs = (
       var staff = action.payload;
       // var id = parseInt(state.length, 10);
       // staff = { id, ...staff };
-      staff.id = state.staffs.length;
+      // staff.id = state.staffs.length;
       return { ...state, staffs: state.staffs.concat(staff) };
     default:
       return state;
