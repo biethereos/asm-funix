@@ -1,32 +1,58 @@
-import React from 'react';
-import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Card, CardBody, CardText, CardTitle } from "reactstrap";
+import { Loading } from "./LoadingComponent";
 
 const RenderDepartments = ({ department }) => {
-	return (
-		<Card>
-			<CardBody>
-				<CardTitle>Phòng ban: {department.name}</CardTitle>
-				<CardText>Số người: {department.numberOfStaff}</CardText>
-			</CardBody>
-		</Card>
-	);
+  return (
+    <Link to={`department/${department.id}`}>
+      <Card>
+        <CardBody>
+          <CardTitle>Phòng ban: {department.name}</CardTitle>
+          <CardText>Số người: {department.numberOfStaff}</CardText>
+        </CardBody>
+      </Card>
+    </Link>
+  );
 };
 
 const Department = (props) => {
-	const departments = props.departments.staffs.map(item => item.department).filter((item, pos, self) => self.indexOf(item) === pos);
-	console.log(departments);
-	const deparmentList = departments.map((department) => {
-		return (
-			<div key={department.id} className="col-xs-12 col-md-6 col-lg-4 my-2">
-				<RenderDepartments department={department} />
-			</div>
-		);
-	});
-	return (
-		<div className="container">
-			<div className="row">{deparmentList}</div>
-		</div>
-	);
+  const deparmentList = props.departments.map((department) => {
+    return (
+      <div key={department.id} className="col-xs-12 col-md-6 col-lg-4 my-2">
+        <RenderDepartments
+          department={department}
+          staffNum={props.staffs.filter(
+            (staff) => staff.departmentId === department.id
+          )}
+        />
+      </div>
+    );
+  });
+
+  if (props.departmentsLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  } else if (props.departmentsFailed) {
+    return (
+      <div className="container">
+        <div className="row">
+          <h4>{props.departmentsFailed}</h4>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="container">
+        <div className="row">{deparmentList}</div>
+      </div>
+    );
+  }
 };
 
 export default Department;
