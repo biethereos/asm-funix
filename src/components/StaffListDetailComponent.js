@@ -1,5 +1,12 @@
 import React from "react";
-import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardImg,
+  CardText,
+  CardTitle,
+} from "reactstrap";
 import dateFormat from "dateformat";
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -32,6 +39,7 @@ function RenderStaff({ staff, department }) {
               <CardText> Phòng ban: {deptName.name}</CardText>
               <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
               <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
+              <Button>Update</Button>
             </CardBody>
           </Card>
         </div>

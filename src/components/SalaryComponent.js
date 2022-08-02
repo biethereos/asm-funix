@@ -36,7 +36,7 @@ const Salary = (props) => {
   console.log(props);
   let [sortBySalary, setSortBySalary] = useState(false);
   const salaryList = props.staffsSalary
-    .sort((a, b) => (sortBySalary ? a.id - b.id : b.id - a.id))
+    .sort((a, b) => (sortBySalary ? b.id - a.id : a.id - b.id))
     .map((staff) => {
       return (
         <div key={staff.id} className="col-sm-12 col-md-6 col-lg-4 my-2">

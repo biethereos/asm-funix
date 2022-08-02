@@ -31,6 +31,17 @@ export const Staffs = (
       // staff = { id, ...staff };
       // staff.id = state.staffs.length;
       return { ...state, staffs: state.staffs.concat(staff) };
+
+    case ActionTypes.REMOVE_STAFF:
+      const filteredStaff = state.staffs.filter(
+        (staff) => staff.id !== action.payload
+      );
+      return {
+        ...state,
+        isLoading: false,
+        errMess: null,
+        staffs: filteredStaff,
+      };
     default:
       return state;
   }

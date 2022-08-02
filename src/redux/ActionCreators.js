@@ -6,6 +6,21 @@ export const addStaff = (staff) => ({
   payload: staff,
 });
 
+export const removedStaff = (id) => ({
+  type: ActionTypes.REMOVE_STAFF,
+  payload: id,
+});
+
+export const deleteStaff = (id) => (dispatch) => {
+  if (window.confirm("Are you sure to delete this staff?")) {
+    return fetch(baseUrl + `staffs/${id}`, {
+      method: "DELETE",
+    }).then(() => dispatch(removedStaff(id)));
+  } else {
+    return;
+  }
+};
+
 export const postStaff = (staff) => (dispatch) => {
   const newStaff = {
     ...staff,

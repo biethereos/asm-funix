@@ -22,16 +22,21 @@ const minLength = (len) => (val) => val && val.length >= len;
 // const isNumber = (val) => !isNaN(Number(val));
 // const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
-function RenderStaffList({ staff, deptName }) {
+function RenderStaffList({ staff, onDeleteStaff }) {
   return (
-    <Link to={`/staff/${staff.id}`}>
-      <Card>
-        <CardImg width="100%" src={staff.image} alt={staff.name} />
-        <CardBody>
-          <CardTitle> {staff.name}</CardTitle>
-        </CardBody>
-      </Card>
-    </Link>
+    <div>
+      <Link to={`/staff/${staff.id}`}>
+        <Card>
+          <CardImg width="100%" src={staff.image} alt={staff.name} />
+          <CardBody>
+            <CardTitle> {staff.name}</CardTitle>
+          </CardBody>
+        </Card>
+      </Link>
+      <Button color="danger" onClick={() => onDeleteStaff(staff.id)}>
+        Delete
+      </Button>
+    </div>
   );
 }
 
@@ -154,7 +159,6 @@ class StaffList extends Component {
 
   // 	return errors;
   // }
-
   render() {
     // const errors = this.validate(
     // 	this.state.name,
@@ -176,9 +180,7 @@ class StaffList extends Component {
           <div key={staff.id} className="col-sm-6 col-md-4 col-lg-2 mt-3">
             <RenderStaffList
               staff={staff}
-              deptName={this.props.departments.filter(
-                (dept) => dept.id === staff.departmentId
-              )}
+              onDeleteStaff={this.props.deleteStaff}
             />
           </div>
         );

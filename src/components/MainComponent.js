@@ -5,6 +5,7 @@ import StaffListDetail from "./StaffListDetailComponent";
 import Footer from "./FooterComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import Department from "./DepartmentComponent";
+import DepartmentDetail from "./DepartmentDetailComponent";
 import Salary from "./SalaryComponent";
 import { connect } from "react-redux";
 import {
@@ -12,8 +13,8 @@ import {
   fetchStaffs,
   fetchStaffsSalary,
   postStaff,
+  deleteStaff,
 } from "../redux/ActionCreators";
-import DepartmentDetail from "./DepartmentDetailComponent";
 
 const mapStateToProps = (state) => {
   return {
@@ -30,6 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchDepartments: () => dispatch(fetchDepartments()),
   fetchStaffsSalary: () => dispatch(fetchStaffsSalary()),
+  deleteStaff: (id) => dispatch(deleteStaff(id)),
 });
 
 class Main extends Component {
@@ -120,6 +122,7 @@ class Main extends Component {
                 departments={this.props.departments.departments}
                 staffsLoading={this.props.staffs.isLoading}
                 staffsFailed={this.props.staffs.errMess}
+                deleteStaff={this.props.deleteStaff}
               />
             )}
           />
