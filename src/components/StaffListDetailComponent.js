@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardImg,
-  CardText,
-  CardTitle,
-} from "reactstrap";
+import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
 import dateFormat from "dateformat";
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
+import UpdateForm from "./UpdateFormComponent";
 
-function RenderStaff({ staff, department }) {
+function RenderStaff({ staff, department, updateStaff }) {
   const deptName = department.filter(
     (dept) => dept.id === staff.departmentId
   )[0];
@@ -39,7 +33,12 @@ function RenderStaff({ staff, department }) {
               <CardText> Phòng ban: {deptName.name}</CardText>
               <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
               <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
-              <Button>Update</Button>
+              <UpdateForm
+                staff={staff}
+                dept={deptName}
+                department={department}
+                updateStaff={updateStaff}
+              />
             </CardBody>
           </Card>
         </div>
@@ -82,7 +81,11 @@ const StaffListDetail = (props) => {
             <hr />
           </div>
         </div>
-        <RenderStaff staff={props.staff} department={props.department} />
+        <RenderStaff
+          staff={props.staff}
+          department={props.department}
+          updateStaff={props.updateStaff}
+        />
       </div>
     );
   } else {

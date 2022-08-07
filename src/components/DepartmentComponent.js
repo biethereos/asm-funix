@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { Card, CardBody, CardText, CardTitle } from "reactstrap";
 import { Loading } from "./LoadingComponent";
 
-const RenderDepartments = ({ department }) => {
+const RenderDepartments = ({ department, staffNum }) => {
   return (
-    <Link to={`department/${department.id}`}>
+    <Link to={`/department/${department.id}`}>
       <Card>
         <CardBody>
           <CardTitle>Phòng ban: {department.name}</CardTitle>
-          <CardText>Số người: {department.numberOfStaff}</CardText>
+          <CardText>Số người: {staffNum.length}</CardText>
         </CardBody>
       </Card>
     </Link>

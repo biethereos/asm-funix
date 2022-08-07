@@ -14,6 +14,7 @@ import {
   fetchStaffsSalary,
   postStaff,
   deleteStaff,
+  updateStaff,
 } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
@@ -32,15 +33,10 @@ const mapDispatchToProps = (dispatch) => ({
   fetchDepartments: () => dispatch(fetchDepartments()),
   fetchStaffsSalary: () => dispatch(fetchStaffsSalary()),
   deleteStaff: (id) => dispatch(deleteStaff(id)),
+  updateStaff: (staff) => dispatch(updateStaff(staff)),
 });
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-
-    // this.addStaff = this.addStaff.bind(this);
-  }
-
   componentDidMount() {
     this.props.fetchStaffs();
     this.props.fetchDepartments();
@@ -84,6 +80,7 @@ class Main extends Component {
           isLoading={this.props.staffs.isLoading}
           errMess={this.props.staffs.errMess}
           department={this.props.departments.departments}
+          updateStaff={this.props.updateStaff}
         />
       );
     };

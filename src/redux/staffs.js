@@ -26,21 +26,33 @@ export const Staffs = (
         staffs: [],
       };
     case ActionTypes.ADD_STAFF:
-      var staff = action.payload;
+      // var staff = action.payload;
       // var id = parseInt(state.length, 10);
       // staff = { id, ...staff };
       // staff.id = state.staffs.length;
-      return { ...state, staffs: state.staffs.concat(staff) };
+      return {
+        ...state,
+        isLoading: false,
+        errMess: null,
+        staffs: action.payload,
+      };
 
     case ActionTypes.REMOVE_STAFF:
-      const filteredStaff = state.staffs.filter(
+      const filteredStaffs = state.staffs.filter(
         (staff) => staff.id !== action.payload
       );
       return {
         ...state,
         isLoading: false,
         errMess: null,
-        staffs: filteredStaff,
+        staffs: filteredStaffs,
+      };
+    case ActionTypes.UPDATE_STAFF:
+      return {
+        ...state,
+        isLoading: false,
+        errMess: null,
+        staffs: action.payload,
       };
     default:
       return state;

@@ -10,8 +10,8 @@ import {
 } from "reactstrap";
 import { Loading } from "./LoadingComponent";
 
-const base = 3000000;
-const hourOfOvertime = 200000;
+// const base = 3000000;
+// const hourOfOvertime = 200000;
 function RenderSalary({ salary }) {
   return (
     <Card>
@@ -22,10 +22,13 @@ function RenderSalary({ salary }) {
         <CardText>Số giờ làm thêm: {salary.overTime}</CardText>
         <CardText className="bg-light p-2 shadow">
           Lương:{" "}
-          {(
+          {
+            /* {(
             salary.salaryScale * base +
             salary.overTime * hourOfOvertime
-          ).toFixed(0)}
+          ).toFixed(0)} */
+            salary.salary
+          }
         </CardText>
       </CardBody>
     </Card>
@@ -36,7 +39,7 @@ const Salary = (props) => {
   console.log(props);
   let [sortBySalary, setSortBySalary] = useState(false);
   const salaryList = props.staffsSalary
-    .sort((a, b) => (sortBySalary ? b.id - a.id : a.id - b.id))
+    .sort((a, b) => (sortBySalary ? b.salary - a.salary : a.salary - b.salary))
     .map((staff) => {
       return (
         <div key={staff.id} className="col-sm-12 col-md-6 col-lg-4 my-2">
@@ -77,7 +80,7 @@ const Salary = (props) => {
             className="btn btn-primary btn-sm"
             onClick={() => setSortBySalary(!sortBySalary)}
           >
-            Sắp xếp theo id
+            Sắp xếp theo lương
           </button>
         </div>
         <div className="row">{salaryList}</div>

@@ -44,24 +44,24 @@ class StaffList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      doB: "",
-      salaryScale: 1,
-      startDate: "",
-      department: "Sale",
-      annualLeave: 0,
-      overTime: 0,
-      salary: 30000,
-      image: "/assets/images/alberto.png",
-      touched: {
-        name: false,
-        doB: false,
-        salaryScale: false,
-        startDate: false,
-        department: false,
-        annualLeave: false,
-        overTime: false,
-      },
+      // name: "",
+      // doB: "",
+      // salaryScale: 1,
+      // startDate: "",
+      // department: "Sale",
+      // annualLeave: 0,
+      // overTime: 0,
+      // salary: 30000,
+      // image: "/assets/images/alberto.png",
+      // touched: {
+      //   name: false,
+      //   doB: false,
+      //   salaryScale: false,
+      //   startDate: false,
+      //   department: false,
+      //   annualLeave: false,
+      //   overTime: false,
+      // },
       input: "",
       isOpenModal: false,
     };
@@ -109,10 +109,12 @@ class StaffList extends Component {
       (v) => v.name === values.department
     );
     const image = "/assets/images/alberto.png";
-    const staff = { ...values, image };
+    const salary = 3000000 + values.overTime * 200000;
+    const staff = { ...values, image, salary };
     staff.departmentId = department.id;
-    department.numberOfStaff++;
+    // department.numberOfStaff++;
     staff.image = image;
+    staff.salary = salary;
     this.props.postStaff(staff);
   };
 
@@ -169,6 +171,7 @@ class StaffList extends Component {
     // 	this.state.annualLeave,
     // 	this.state.overTime
     // );
+    console.log(this.props.staffs);
     const filteredData = this.props.staffs.filter((item) => {
       return item.name.toLowerCase().includes(this.state.input.toLowerCase());
     });

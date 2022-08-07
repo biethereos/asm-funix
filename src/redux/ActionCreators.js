@@ -11,6 +11,45 @@ export const removedStaff = (id) => ({
   payload: id,
 });
 
+export const updatedStaff = (staff) => ({
+  type: ActionTypes.UPDATE_STAFF,
+  payload: staff,
+});
+
+export const updateStaff = (staff) => (dispatch) => {
+  return fetch(baseUrl + "staffs", {
+    method: "PATCH",
+    body: JSON.stringify(staff),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "same-origin",
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errMess = new Error(error.message);
+        throw errMess;
+      }
+    )
+    .then((response) => response.json())
+    .then((response) => dispatch(updatedStaff(response)))
+    .catch((error) => {
+      console.log("Update staff error: ", error.message);
+      alert("Your staff could not be updated\nError: " + error.message);
+    });
+};
+
 export const deleteStaff = (id) => (dispatch) => {
   if (window.confirm("Are you sure to delete this staff?")) {
     return fetch(baseUrl + `staffs/${id}`, {
@@ -22,13 +61,13 @@ export const deleteStaff = (id) => (dispatch) => {
 };
 
 export const postStaff = (staff) => (dispatch) => {
-  const newStaff = {
-    ...staff,
-  };
+  // const newStaff = {
+  //   ...staff,
+  // };
 
   return fetch(baseUrl + "staffs", {
     method: "POST",
-    body: JSON.stringify(newStaff),
+    body: JSON.stringify(staff),
     headers: { "Content-Type": "application/json" },
     credentials: "same-origin",
   })
