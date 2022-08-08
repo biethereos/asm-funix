@@ -15,6 +15,7 @@ import {
   Row,
 } from "reactstrap";
 import { Loading } from "./LoadingComponent";
+import { FadeTransform } from "react-animation-components";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -25,17 +26,24 @@ const minLength = (len) => (val) => val && val.length >= len;
 function RenderStaffList({ staff, onDeleteStaff }) {
   return (
     <div>
-      <Link to={`/staff/${staff.id}`}>
-        <Card>
-          <CardImg width="100%" src={staff.image} alt={staff.name} />
-          <CardBody>
-            <CardTitle> {staff.name}</CardTitle>
-          </CardBody>
-        </Card>
-      </Link>
-      <Button color="danger" onClick={() => onDeleteStaff(staff.id)}>
-        Delete
-      </Button>
+      <FadeTransform
+        in
+        transformProps={{
+          exitTransform: "scale(0.5) translateY(-50%)",
+        }}
+      >
+        <Link to={`/staff/${staff.id}`}>
+          <Card>
+            <CardImg width="100%" src={staff.image} alt={staff.name} />
+            <CardBody>
+              <CardTitle> {staff.name}</CardTitle>
+            </CardBody>
+          </Card>
+        </Link>
+        <Button color="danger" onClick={() => onDeleteStaff(staff.id)}>
+          Delete
+        </Button>
+      </FadeTransform>
     </div>
   );
 }
@@ -171,7 +179,6 @@ class StaffList extends Component {
     // 	this.state.annualLeave,
     // 	this.state.overTime
     // );
-    console.log(this.props.staffs);
     const filteredData = this.props.staffs.filter((item) => {
       return item.name.toLowerCase().includes(this.state.input.toLowerCase());
     });
@@ -208,7 +215,7 @@ class StaffList extends Component {
       return (
         <div className="container">
           <div className="row">
-            <div className="col-xs-12 col-md-3 col-lg-6 mt-3">
+            <div className="col-12 col-md-6 mt-3">
               <div className="row">
                 <div className="col-10 col-md-10">Nhân Viên</div>
                 <div className="col-2 col-auto">

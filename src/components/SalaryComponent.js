@@ -9,34 +9,45 @@ import {
   CardTitle,
 } from "reactstrap";
 import { Loading } from "./LoadingComponent";
+import { FadeTransform } from "react-animation-components";
 
 // const base = 3000000;
 // const hourOfOvertime = 200000;
 function RenderSalary({ salary }) {
-  return (
-    <Card>
-      <CardBody>
-        <CardTitle>Họ và Tên: {salary.name}</CardTitle>
-        <CardText>Mã Nhân viên: {salary.id}</CardText>
-        <CardText>Hệ số lương:{salary.salaryScale}</CardText>
-        <CardText>Số giờ làm thêm: {salary.overTime}</CardText>
-        <CardText className="bg-light p-2 shadow">
-          Lương:{" "}
-          {
-            /* {(
-            salary.salaryScale * base +
-            salary.overTime * hourOfOvertime
-          ).toFixed(0)} */
-            salary.salary
-          }
-        </CardText>
-      </CardBody>
-    </Card>
-  );
+  if (salary != null) {
+    return (
+      <FadeTransform
+        in
+        transformProps={{
+          exitTransform: "scale(0.5) translateY(-50%)",
+        }}
+      >
+        <Card>
+          <CardBody>
+            <CardTitle>Họ và Tên: {salary.name}</CardTitle>
+            <CardText>Mã Nhân viên: {salary.id}</CardText>
+            <CardText>Hệ số lương:{salary.salaryScale}</CardText>
+            <CardText>Số giờ làm thêm: {salary.overTime}</CardText>
+            <CardText className="bg-light p-2 shadow">
+              Lương:{" "}
+              {
+                /* {(
+              salary.salaryScale * base +
+              salary.overTime * hourOfOvertime
+            ).toFixed(0)} */
+                salary.salary
+              }
+            </CardText>
+          </CardBody>
+        </Card>
+      </FadeTransform>
+    );
+  } else {
+    return <div></div>;
+  }
 }
 
 const Salary = (props) => {
-  console.log(props);
   let [sortBySalary, setSortBySalary] = useState(false);
   const salaryList = props.staffsSalary
     .sort((a, b) => (sortBySalary ? b.salary - a.salary : a.salary - b.salary))
@@ -70,7 +81,7 @@ const Salary = (props) => {
         <div className="row">
           <Breadcrumb>
             <BreadcrumbItem>
-              <Link to="/staff">Nhân Viên</Link>
+              <Link to="/staff">Staff</Link>
             </BreadcrumbItem>
             <BreadcrumbItem active>Bảng lương</BreadcrumbItem>
           </Breadcrumb>

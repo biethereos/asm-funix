@@ -51,7 +51,7 @@ export default class UpdateForm extends Component {
     const startDate = date1.toLocaleDateString("en-CA");
     return (
       <div>
-        <Button onClick={this.toggleModal}>
+        <Button onClick={this.toggleModal} color="primary">
           <span className="fa fa-pencil fa-lg"></span>
           Update Staff
         </Button>
